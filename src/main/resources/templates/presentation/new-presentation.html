@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New Course</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/presentation}" th:object="${presentation}" enctype="multipart/form-data">
+    <label for="presentationName">Enter presentation name: </label>
+    <input type="text" th:field="*{presentationName}" id="presentationName"/>
+    <br/>
+    <label for="presentationFile">Add presentation: </label>
+    <input type="file" th:field="*{presentationFile}" id="presentationFile"/>
+    <br/>
+
+    <input type="submit" value="Add"/>
+</form>
+
+</body>
+</html>
