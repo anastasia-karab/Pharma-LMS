@@ -24,6 +24,12 @@ public class PresentationResourse {
     @Value("${upload.path}")
     private String uploadPath;
 
+    @GetMapping("/all")
+    public String getAllPresentations(Model model) {
+        model.addAttribute("presentations", presentationService.findAllPresentations());
+        return "presentation/show-presentations";
+    }
+
     @GetMapping("/add")
     public String newPresentation(Model model) {
         model.addAttribute("presentation", new Presentation());
@@ -33,23 +39,32 @@ public class PresentationResourse {
     @PostMapping()
     public String addPresentation(@ModelAttribute("presentation") Presentation presentation,
                                   @RequestParam("presentationFile") MultipartFile presentationFile) throws IOException {
-        if (presentationFile != null && !presentationFile.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
+        if (presentationFile != null) {
+            String originalFileName = presentationFile.getOriginalFilename();
+            if (!originalFileName.isEmpty()) {
+                File uploadDir = new File(uploadPath);
 
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+
+                String uuidPres = UUID.randomUUID().toString();
+                String resultPresName = uuidPres + "." + originalFileName;
+
+                presentationFile.transferTo(new File(uploadPath + "/" + resultPresName));
+
+                presentation.setPresentationFileDir(uploadPath + "/" + resultPresName);
+                presentation.setPresentationFile(presentationFile);
             }
-
-            String uuidPres = UUID.randomUUID().toString();
-            String resultPresName = uuidPres + "." + presentationFile.getOriginalFilename();
-
-            presentationFile.transferTo(new File(uploadPath + "/" + resultPresName));
-
-            presentation.setPresentationFileDir(uploadPath + "/" + resultPresName);
-            presentation.setPresentationFile(presentationFile);
         }
 
         presentationService.addPresentation(presentation);
-        return "success";
+        return "redirect:/presentation/all";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePresentation(@PathVariable("id") Long id) {
+        presentationService.deletePresentationById(id);
+        return "redirect:/presentation/all";
     }
 }

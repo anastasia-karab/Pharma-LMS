@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Update employee</title>
+    <title>Update course</title>
 </head>
 <body>
 
-  <form th:method="PATCH" th:action="@{'/course/' + ${course.getId()} + '/edit'}" th:object="${course}">
+  <form th:method="PUT" th:action="@{'/course/' + ${course.getId()} + '/edit'}" th:object="${course}">
     <label for="courseName">Enter course name: </label>
     <input type="text" th:field="*{courseName}" id="courseName"/>
     <br/>

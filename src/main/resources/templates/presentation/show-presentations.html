@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>All presentations</title>
+</head>
+<body>
+
+<div th:each="presentation : ${presentations}">
+  <a th:text="${presentation.presentationName}">course</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/presentation/add">Add new presentation</a>
+
+</body>
+</html>

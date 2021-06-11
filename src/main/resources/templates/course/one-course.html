@@ -5,14 +5,14 @@
     <title>Course</title>
 </head>
 <body>
-  <p th:text="${course.getCourseName()}">VALUE</p>
-  <p th:text="${course.getDepartment()}">VALUE</p>
+  <p th:text="${course.courseName}">VALUE</p>
+  <p th:text="${course.department}">VALUE</p>
   </form>
 
   <a th:href="@{'/course/' + ${course.id} + '/edit'}"
      th:text="Edit">Update</a>
 
-  <form th:method="DELETE" th:action="@{'/' + ${course.id}}">
+  <form th:method="DELETE" th:action="@{'course/' + ${course.id}}">
     <input type="submit" value="Delete"/>
   </form>
 </body>
