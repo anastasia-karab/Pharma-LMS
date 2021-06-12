@@ -1,31 +1,31 @@
 package pharma.lms.PharmaLMS.course.presentation;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="pres")
 public class Presentation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String presentationName;
-    private String presentationFileDir;
+
+    private String presName;
+    private String presType;
+
     @Lob
-    @Column(name = "dir", columnDefinition = "BLOB")
-    private MultipartFile presentationFile;
+    private byte[] data;
 
-    public Presentation() {
-    }
+    public Presentation() {}
 
-    public Presentation(Long id,
-                        String presentationName,
-                        String presentationFileDir,
-                        MultipartFile presentationFile) {
-        this.id = id;
-        this.presentationName = presentationName;
-        this.presentationFileDir = presentationFileDir;
-        this.presentationFile = presentationFile;
+    public Presentation(String presName, String presType, byte[] data) {
+        this.presName = presName;
+        this.presType = presType;
+        this.data = data;
     }
 
     public Long getId() {
@@ -36,36 +36,28 @@ public class Presentation {
         this.id = id;
     }
 
-    public String getPresentationName() {
-        return presentationName;
+    public String getPresName() {
+        return presName;
     }
 
-    public void setPresentationName(String presentationName) {
-        this.presentationName = presentationName;
+    public void setPresName(String presName) {
+        this.presName = presName;
     }
 
-    public String getPresentationFileDir() {
-        return presentationFileDir;
+    public String getPresType() {
+        return presType;
     }
 
-    public void setPresentationFileDir(String presentationFile) {
-        this.presentationFileDir = presentationFile;
+    public void setPresType(String presType) {
+        this.presType = presType;
     }
 
-    public MultipartFile getPresentationFile() {
-        return presentationFile;
+    public byte[] getData() {
+        return data;
     }
 
-    public void setPresentationFile(MultipartFile presentationFile) {
-        this.presentationFile = presentationFile;
+    public void setData(byte[] data) {
+        this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "Presentation{" +
-                "id=" + id +
-                ", presentationName='" + presentationName + '\'' +
-                ", presentationFile=" + presentationFileDir +
-                '}';
-    }
 }

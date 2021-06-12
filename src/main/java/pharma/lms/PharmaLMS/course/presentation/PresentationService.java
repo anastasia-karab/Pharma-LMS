@@ -1,30 +1,34 @@
 package pharma.lms.PharmaLMS.course.presentation;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pharma.lms.PharmaLMS.course.presentation.Presentation;
-import pharma.lms.PharmaLMS.course.presentation.PresentationRepo;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PresentationService {
-    private final PresentationRepo presentationRepo;
-
     @Autowired
-    public PresentationService(PresentationRepo presentationRepo) {
-        this.presentationRepo = presentationRepo;
+    private PresentationRepo presentationRepo;
+
+    public Presentation saveFile(MultipartFile file) {
+        String docname = file.getOriginalFilename();
+        try {
+            Presentation doc = new Presentation(docname,file.getContentType(),file.getBytes());
+            return presentationRepo.save(doc);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public Presentation addPresentation(Presentation presentation) {
-        return presentationRepo.save(presentation);
+    public Optional<Presentation> getFile(Long fileId) {
+        return presentationRepo.findById(fileId);
     }
 
-    public List<Presentation> findAllPresentations() {
+    public List<Presentation> getFiles(){
         return presentationRepo.findAll();
-    }
-
-    public void deletePresentationById(Long id) {
-        presentationRepo.deleteById(id);
     }
 }
