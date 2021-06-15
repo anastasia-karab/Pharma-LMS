@@ -2,11 +2,10 @@ package pharma.lms.PharmaLMS.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pharma.lms.PharmaLMS.course.Course;
-import pharma.lms.PharmaLMS.course.CourseNotFoundException;
-import pharma.lms.PharmaLMS.course.CourseRepo;
+import pharma.lms.PharmaLMS.user.Department;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
@@ -33,6 +32,14 @@ public class CourseService {
         return courseRepo
                 .findCourseById(id)
                 .orElseThrow(() -> new CourseNotFoundException("Course by id " + id + " not found"));
+    }
+
+    public List<Course> findCoursesByDepartment(Department department) {
+        return courseRepo
+                .findAll()
+                .stream()
+                .filter(course -> course.getDepartment() == department)
+                .collect(Collectors.toList());
     }
 
     public void deleteCourseById(Long id) {

@@ -1,7 +1,6 @@
 package pharma.lms.PharmaLMS.course;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pharma.lms.PharmaLMS.course.Course;
 
 import java.util.Optional;
 

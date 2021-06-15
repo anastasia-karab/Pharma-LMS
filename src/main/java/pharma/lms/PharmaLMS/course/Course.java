@@ -1,5 +1,7 @@
 package pharma.lms.PharmaLMS.course;
 
+import pharma.lms.PharmaLMS.user.Department;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,14 +10,16 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String courseName;
-    private String department;
+
+    @Enumerated(EnumType.STRING)
+    private Department department;
 
     public Course() {
     }
 
     public Course(Long id,
                   String courseName,
-                  String department) {
+                  Department department) {
         this.id = id;
         this.courseName = courseName;
         this.department = department;
@@ -37,20 +41,12 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", courseName='" + courseName + '\'' +
-                ", department='" + department + '\'' +
-                '}';
-    }
 }

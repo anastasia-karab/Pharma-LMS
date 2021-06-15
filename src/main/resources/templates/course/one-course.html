@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Course</title>
+    <title>Курс</title>
 </head>
 <body>
   <p th:text="${course.courseName}">VALUE</p>
@@ -10,10 +10,10 @@
   </form>
 
   <a th:href="@{'/course/' + ${course.id} + '/edit'}"
-     th:text="Edit">Update</a>
+     th:text="Обновить">Edit</a>
 
   <form th:method="DELETE" th:action="@{'course/' + ${course.id}}">
-    <input type="submit" value="Delete"/>
+    <input type="submit" value="Удалить"/>
   </form>
 </body>
 </html>

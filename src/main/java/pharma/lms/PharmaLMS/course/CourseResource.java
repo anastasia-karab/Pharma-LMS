@@ -44,7 +44,7 @@ public class CourseResource {
         }
 
         courseService.addCourse(course);
-        return "course/show-courses";
+        return "redirect:/course/all";
     }
 
     @GetMapping("/{id}/edit")
@@ -54,7 +54,7 @@ public class CourseResource {
         return "course/edit-course";
     }
 
-    @PatchMapping
+    @PutMapping()
     public String updateCourse(@ModelAttribute("course") Course course,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -67,7 +67,7 @@ public class CourseResource {
     @DeleteMapping("/{id}")
     public String deleteCourse(@PathVariable("id") Long id) {
         courseService.deleteCourseById(id);
-        return "/course/show-courses";
+        return "redirect:/course/all";
     }
 
 }

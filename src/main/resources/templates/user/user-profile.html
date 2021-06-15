@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ваши курсы</title>
+</head>
+<body>
+<p th:text="${user.name}">VALUE</p>
+<p th:text="${user.department}">VALUE</p>
+<p th:text="${user.jobTitle}">VALUE</p>
+
+<div th:each="course : ${courses}">
+    <a th:href="@{'/course/find/' + ${course.id}}"
+       th:text="${course.courseName}">course</a>
+</div>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+
+</body>
+</html>

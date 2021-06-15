@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Register PharmaLMS </title>
+    <title>PharmaLMS: Регистрация </title>
 </head>
 <body>
 <div th:if="${param.error}">
-    Invalid username and password.
+    Неверный логин или пароль
 </div>
 <form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Create an account"/></div>
+    <div><label> ФИО: <input type="text" name="name"/> </label></div>
+    <div><label> Логин: <input type="text" name="username"/> </label></div>
+    <div><label> Пароль: <input type="password" name="password"/> </label></div>
+    <div><label> Отдел: <input type="text" name="department"></label></div>
+    <div><label> Должность: <input type="text" name="jobTitle"/> </label></div>
+    <div><input type="submit" value="Создать аккаунт"/></div>
 </form>
 </body>
 </html>

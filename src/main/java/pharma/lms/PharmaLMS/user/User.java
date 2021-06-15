@@ -9,9 +9,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
     private String username;
     private String password;
     private boolean active;
+
+    @Enumerated(EnumType.STRING)
+    private Department department;
+    private String jobTitle;
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -21,10 +26,13 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, boolean active, Set<UserRole> userRoles) {
+    public User(String name, String username, String password, boolean active, Department department, String jobTitle, String imageURL, Set<UserRole> userRoles) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.active = active;
+        this.department = department;
+        this.jobTitle = jobTitle;
         this.userRoles = userRoles;
     }
 
@@ -67,4 +75,29 @@ public class User {
     public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
 }
