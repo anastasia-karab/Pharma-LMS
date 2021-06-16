@@ -27,7 +27,10 @@
         <tr th:each="doc:${docs}">
             <td th:text="${doc.id}" />
             <td th:text="${doc.presName}"/>
-            <td><a th:href="@{'/presentations/downloadFile/'+${doc.id}}">Download</a></td>
+            <td><a th:href="@{'/presentations/downloadFile/' + ${doc.id}}">Download</a></td>
+            <td><form th:action="@{'/course/' + ${doc.id} + '/newpres'}" method="post">
+                <input type="submit" value="Добавить в курс">
+            </form></td>
         </tr>
         </tbody>
     </table>

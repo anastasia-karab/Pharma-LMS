@@ -39,7 +39,7 @@ public class PresentationResource {
         Presentation doc = presentationService.getFile(fileId).get();
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(doc.getPresType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+doc.getPresName()+"\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\"" + doc.getPresName() + "\"")
                 .body(new ByteArrayResource(doc.getData()));
     }
 

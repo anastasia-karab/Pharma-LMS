@@ -1,21 +1,24 @@
 package pharma.lms.PharmaLMS.course.presentation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import pharma.lms.PharmaLMS.course.Course;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="pres")
 public class Presentation {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "presentation_id")
     private Long id;
 
     private String presName;
     private String presType;
+
+    @ManyToMany(mappedBy = "presentations")
+    private Set<Course> courses = new HashSet<>();
 
     @Lob
     private byte[] data;
@@ -60,4 +63,11 @@ public class Presentation {
         this.data = data;
     }
 
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 }

@@ -9,6 +9,9 @@
   <p th:text="${course.department}">VALUE</p>
   </form>
 
+  <a th:href="@{'/course/' + ${course.id} + '/presentations/add'}"
+     th:text="Добавить">Add</a>
+
   <a th:href="@{'/course/' + ${course.id} + '/edit'}"
      th:text="Обновить">Edit</a>
 

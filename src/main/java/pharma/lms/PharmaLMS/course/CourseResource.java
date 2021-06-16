@@ -70,4 +70,18 @@ public class CourseResource {
         return "redirect:/course/all";
     }
 
+    @GetMapping("/{id}/presentations/add")
+    public String addPresentation(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("course", courseService.findCourseById(id));
+        return "redirect:/presentations/all";
+    }
+
+    @PostMapping("/{id}/newpres")
+    public String choosePresentation(@ModelAttribute("course") Course course,
+                                     @PathVariable("id") Long presId) {
+        Long courseId = course.getId();
+        courseService.addPresentationToTheCourse(courseId, presId);
+        return "redirect:/course/all";
+    }
+
 }
