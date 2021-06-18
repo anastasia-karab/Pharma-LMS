@@ -1,7 +1,9 @@
-package pharma.lms.PharmaLMS.user;
+package pharma.lms.PharmaLMS.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pharma.lms.PharmaLMS.user.domain.User;
+import pharma.lms.PharmaLMS.user.repo.UserRepo;
 
 @Service
 public class UserService {

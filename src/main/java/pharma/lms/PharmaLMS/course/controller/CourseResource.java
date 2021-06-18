@@ -1,10 +1,13 @@
-package pharma.lms.PharmaLMS.course;
+package pharma.lms.PharmaLMS.course.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pharma.lms.PharmaLMS.course.service.CourseService;
+import pharma.lms.PharmaLMS.course.domain.Course;
 
 import java.io.IOException;
 
@@ -19,6 +22,7 @@ public class CourseResource {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String getAllCourses(Model model) {
         model.addAttribute("courses", courseService.findAllCourses());
         return "course/show-courses";

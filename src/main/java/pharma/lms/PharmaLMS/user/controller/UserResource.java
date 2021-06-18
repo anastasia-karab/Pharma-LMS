@@ -1,15 +1,16 @@
-package pharma.lms.PharmaLMS.user.controllers;
+package pharma.lms.PharmaLMS.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pharma.lms.PharmaLMS.course.Course;
-import pharma.lms.PharmaLMS.course.CourseService;
-import pharma.lms.PharmaLMS.user.User;
-import pharma.lms.PharmaLMS.user.UserService;
+import pharma.lms.PharmaLMS.course.domain.Course;
+import pharma.lms.PharmaLMS.course.service.CourseService;
+import pharma.lms.PharmaLMS.user.domain.User;
+import pharma.lms.PharmaLMS.user.service.UserService;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class UserResource {
     }
 
     @GetMapping("{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String myProfile(@PathVariable("id") Long id, Model model) {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);

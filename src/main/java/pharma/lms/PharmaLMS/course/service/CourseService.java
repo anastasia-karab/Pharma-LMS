@@ -1,10 +1,13 @@
-package pharma.lms.PharmaLMS.course;
+package pharma.lms.PharmaLMS.course.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pharma.lms.PharmaLMS.course.presentation.Presentation;
-import pharma.lms.PharmaLMS.course.presentation.PresentationRepo;
-import pharma.lms.PharmaLMS.user.Department;
+import pharma.lms.PharmaLMS.course.domain.Course;
+import pharma.lms.PharmaLMS.course.exception.CourseNotFoundException;
+import pharma.lms.PharmaLMS.course.repo.CourseRepo;
+import pharma.lms.PharmaLMS.presentation.domain.Presentation;
+import pharma.lms.PharmaLMS.presentation.repo.PresentationRepo;
+import pharma.lms.PharmaLMS.user.domain.Department;
 
 import java.util.List;
 import java.util.Set;

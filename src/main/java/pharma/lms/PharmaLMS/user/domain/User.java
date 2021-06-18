@@ -1,4 +1,4 @@
-package pharma.lms.PharmaLMS.user;
+package pharma.lms.PharmaLMS.user.domain;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -18,22 +18,27 @@ public class User {
     private Department department;
     private String jobTitle;
 
-    @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<UserRole> userRoles;
+    @Column(name = "user_role")
+    private UserRole userRole;
 
     public User() {
     }
 
-    public User(String name, String username, String password, boolean active, Department department, String jobTitle, String imageURL, Set<UserRole> userRoles) {
+    public User(String name,
+                String username,
+                String password,
+                boolean active,
+                Department department,
+                String jobTitle,
+                UserRole userRole) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.active = active;
         this.department = department;
         this.jobTitle = jobTitle;
-        this.userRoles = userRoles;
+        this.userRole = userRole;
     }
 
     public Long getId() {
@@ -68,12 +73,12 @@ public class User {
         this.active = active;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     public String getName() {

@@ -1,6 +1,6 @@
-package pharma.lms.PharmaLMS.course.presentation;
+package pharma.lms.PharmaLMS.presentation.domain;
 
-import pharma.lms.PharmaLMS.course.Course;
+import pharma.lms.PharmaLMS.course.domain.Course;
 
 import javax.persistence.*;
 import java.util.HashSet;

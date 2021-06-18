@@ -1,4 +1,4 @@
-package pharma.lms.PharmaLMS.user;
+package pharma.lms.PharmaLMS.user.domain;
 
 public enum Department {
     ООК ("Отдел Обеспечения Качества"),

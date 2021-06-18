@@ -1,4 +1,4 @@
-package pharma.lms.PharmaLMS.course;
+package pharma.lms.PharmaLMS.course.exception;
 
 public class CourseNotFoundException extends RuntimeException {
     public CourseNotFoundException(String message) {

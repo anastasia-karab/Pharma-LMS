@@ -1,4 +1,4 @@
-package pharma.lms.PharmaLMS.course.presentation;
+package pharma.lms.PharmaLMS.presentation.controller;
 
 import java.util.List;
 
@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import pharma.lms.PharmaLMS.presentation.domain.Presentation;
+import pharma.lms.PharmaLMS.presentation.service.PresentationService;
 
 @Controller
 @RequestMapping("/presentations")
