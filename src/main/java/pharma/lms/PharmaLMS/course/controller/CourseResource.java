@@ -22,7 +22,6 @@ public class CourseResource {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String getAllCourses(Model model) {
         model.addAttribute("courses", courseService.findAllCourses());
         return "course/show-courses";
