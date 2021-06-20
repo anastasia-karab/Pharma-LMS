@@ -1,37 +1,51 @@
 package pharma.lms.PharmaLMS.course.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pharma.lms.PharmaLMS.course.service.CourseService;
 import pharma.lms.PharmaLMS.course.domain.Course;
+import pharma.lms.PharmaLMS.presentation.domain.Presentation;
+import pharma.lms.PharmaLMS.presentation.service.PresentationService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/course")
 public class CourseResource {
     private final CourseService courseService;
+    private final PresentationService presentationService;
 
     @Autowired
-    public CourseResource(CourseService courseService) {
+    public CourseResource(CourseService courseService,
+                          PresentationService presentationService) {
         this.courseService = courseService;
+        this.presentationService = presentationService;
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public String getAllCourses(Model model) {
         model.addAttribute("courses", courseService.findAllCourses());
         return "course/show-courses";
     }
 
     @GetMapping("/find/{id}")
-    public String getCourseById(@PathVariable("id") Long id, Model model) {
+    public String getCourseById(@PathVariable("id") Long id,
+                                Model model) {
         model.addAttribute("course", courseService.findCourseById(id));
         return "course/one-course";
+    }
+
+    @GetMapping("/{id}/presentations")
+    public String getPresentationsByCourse(@PathVariable("id") Long id,
+                                           Model model) {
+        model.addAttribute("course", courseService.findCourseById(id));
+        model.addAttribute("presentations", courseService.showCoursePresentations(id));
+        return "course/show-course-presentations";
     }
 
     @GetMapping("/add")
@@ -75,17 +89,19 @@ public class CourseResource {
     }
 
     @GetMapping("/{id}/presentations/add")
-    public String addPresentation(@PathVariable("id") Long id, Model model) {
+    public String addPresentation(@PathVariable("id") Long id,
+                                  Model model) {
         model.addAttribute("course", courseService.findCourseById(id));
-        return "redirect:/presentations/all";
+        List<Presentation> presList = presentationService.getFiles();
+        model.addAttribute("docs", presList);
+
+        return "/course/add-presentation";
     }
 
-    @PostMapping("/{id}/newpres")
-    public String choosePresentation(@ModelAttribute("course") Course course,
-                                     @PathVariable("id") Long presId) {
-        Long courseId = course.getId();
+    @PostMapping("/newpres/{cid}/{pid}")
+    public String choosePresentation(@PathVariable("cid") Long courseId,
+                                     @PathVariable("pid") Long presId) {
         courseService.addPresentationToTheCourse(courseId, presId);
         return "redirect:/course/all";
     }
-
 }

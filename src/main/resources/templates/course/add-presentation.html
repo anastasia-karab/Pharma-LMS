@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add presentation to the course</title>
+</head>
+<body>
+
+<div>
+    <h3>List of Presentations</h3>
+    <a th:href="@{'/course/find/' + ${course.id}}"
+       th:text="${course.courseName + ', ' + course.department}">course</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Download Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doc:${docs}">
+            <td th:text="${doc.id}" />
+            <td th:text="${doc.presName}"/>
+            <td><a th:href="@{'/presentations/downloadFile/' + ${doc.id}}">Download</a></td>
+            <td><form th:action="@{'/course/newpres/' + ${course.id} + '/' + ${doc.id}}" method="post">
+                <input type="submit" value="Добавить в курс">
+            </form></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

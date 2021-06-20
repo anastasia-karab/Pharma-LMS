@@ -1,0 +1,16 @@
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Курс</title>
+</head>
+<body>
+<p th:text="${course.courseName}">VALUE</p>
+<p th:text="${course.department}">VALUE</p>
+
+<div th:each="presentation : ${presentations}">
+  <a th:href="@{'/presentations/downloadFile/' + ${presentation.id}}"
+     th:text="${presentation.presName}">presentation</a>
+</div>
+
+</body>
+</html>

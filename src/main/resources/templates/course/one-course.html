@@ -15,6 +15,9 @@
   <a th:href="@{'/course/' + ${course.id} + '/edit'}"
      th:text="Обновить">Edit</a>
 
+  <a th:href="@{'/course/' + ${course.id} + '/presentations'}"
+     th:text="Презентации">Pres</a>
+
   <form th:method="DELETE" th:action="@{'course/' + ${course.id}}">
     <input type="submit" value="Удалить"/>
   </form>

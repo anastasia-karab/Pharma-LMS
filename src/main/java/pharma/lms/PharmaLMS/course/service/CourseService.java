@@ -1,5 +1,6 @@
 package pharma.lms.PharmaLMS.course.service;
 
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pharma.lms.PharmaLMS.course.domain.Course;
@@ -51,15 +52,25 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
-    public Set<Presentation> addPresentationToTheCourse(Long courseId,
-                                             Long presentationId) {
+    public void addPresentationToTheCourse(Long courseId,
+                                           Long presentationId) {
         Course course = findCourseById(courseId);
         Presentation presentation = presentationRepo.getById(presentationId);
+        Set<Presentation> presentations = course.getPresentations();
 
-        Set<Presentation> coursePresentations = course.getPresentations();
-        coursePresentations.add(presentation);
+        presentations.add(presentation);
+        course.setPresentations(presentations);
+        courseRepo.save(course);
+    }
 
-        return coursePresentations;
+    public List<Presentation> showCoursePresentations(Long courseId) {
+        Course course = findCourseById(courseId);
+
+        return presentationRepo
+                .findAll()
+                .stream()
+                .filter(presentation -> presentation.getCourses().contains(course))
+                .collect(Collectors.toList());
     }
 
     public void deleteCourseById(Long id) {
