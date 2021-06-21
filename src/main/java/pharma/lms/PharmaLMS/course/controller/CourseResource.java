@@ -12,7 +12,6 @@ import pharma.lms.PharmaLMS.presentation.service.PresentationService;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/course")
@@ -72,14 +71,14 @@ public class CourseResource {
         return "course/edit-course";
     }
 
-    @PutMapping()
+    @PutMapping("/{id}/update")
     public String updateCourse(@ModelAttribute("course") Course course,
-                         BindingResult bindingResult) {
+                               BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "course/edit-course";
         }
         courseService.updateCourse(course);
-        return "/course/show-courses";
+        return "redirect:/course/all";
     }
 
     @DeleteMapping("/{id}")

@@ -6,6 +6,6 @@
 </head>
 <body>
 <h1>Добро пожаловать в PharmaLMS</h1>
-<p>Нажмите <a th:href="@{/courses/all}">сюда</a> , чтобы увидеть все свои курсы.</p>
+<p>Нажмите <a th:href="@{'/pharmalms/mycourses/' + ${user.id}}">сюда</a> , чтобы увидеть все свои курсы.</p>
 </body>
 </html>

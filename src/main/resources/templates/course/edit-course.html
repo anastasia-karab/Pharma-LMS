@@ -6,7 +6,7 @@
 </head>
 <body>
 
-  <form th:method="PUT" th:action="@{'/course/' + ${course.id} + '/edit'}" th:object="${course}">
+  <form th:method="PUT" th:action="@{'/course/' + ${course.id} + '/update'}" th:object="${course}">
     <label for="courseName">Имя курса: </label>
     <input type="text" th:field="*{courseName}" id="courseName"/>
     <br/>
