@@ -23,7 +23,7 @@ class CourseRepoTest {
 
     @Test
     void findCourseByIdTest() {
-        Course course = new Course(1L, "Стерилизация", Department.Производство);
+        Course course = new Course("Стерилизация", Department.Производство);
 
         courseRepo.save(course);
 

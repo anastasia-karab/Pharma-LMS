@@ -29,10 +29,8 @@ public class Course {
     public Course() {
     }
 
-    public Course(Long id,
-                  String courseName,
+    public Course(String courseName,
                   Department department) {
-        this.id = id;
         this.courseName = courseName;
         this.department = department;
     }

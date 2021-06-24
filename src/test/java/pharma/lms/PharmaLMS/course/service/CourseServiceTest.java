@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.TestPropertySource;
@@ -23,6 +24,7 @@ class CourseServiceTest {
     private CourseRepo courseRepo;
     @Mock
     private PresentationRepo presentationRepo;
+
     private CourseService courseService;
 
     @BeforeEach
@@ -32,7 +34,7 @@ class CourseServiceTest {
 
     @Test
     void addCourseTest() {
-        Course course = new Course(1L, "Стерилизация", Department.Производство);
+        Course course = new Course("Стерилизация", Department.Производство);
 
         courseService.addCourse(course);
 
@@ -54,7 +56,7 @@ class CourseServiceTest {
 
     @Test
     void updateCourseTest() {
-        Course course = new Course(1L, "Стерилизация", Department.Производство);
+        Course course = new Course("Стерилизация", Department.Производство);
 
         courseService.updateCourse(course);
 
@@ -69,7 +71,7 @@ class CourseServiceTest {
 
     @Test
     void deleteCourseTest() {
-        Course course = new Course(1L, "Стерилизация", Department.Производство);
+        Course course = new Course("Стерилизация", Department.Производство);
 
         courseService.deleteCourseById(course.getId());
 
