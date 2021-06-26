@@ -15,7 +15,7 @@ import pharma.lms.PharmaLMS.user.service.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/pharmalms/mycourses/")
+@RequestMapping("/pharmalms/mycourses")
 public class UserResource {
     private UserService userService;
     private CourseService courseService;
@@ -26,7 +26,7 @@ public class UserResource {
         this.courseService = courseService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String myProfile(@PathVariable("id") Long id, Model model) {
         User user = userService.findUserById(id);

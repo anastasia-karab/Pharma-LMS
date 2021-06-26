@@ -6,16 +6,16 @@ public enum Department {
     Лаборатория ("Лаборатория"),
     Производство ("Производство"),
     Отдел_кадров ("Отдел кадров"),
-    Докмуентация ("Документация"),
+    Документация ("Документация"),
     Высшее_руководство ("Высшее руководство");
 
-    private final String departemntName;
+    private final String departmentName;
 
-    Department(String departemntName) {
-        this.departemntName = departemntName;
+    Department(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public String getDepartemntName() {
-        return departemntName;
+    public String getDepartmentName() {
+        return departmentName;
     }
 }

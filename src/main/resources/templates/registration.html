@@ -12,7 +12,14 @@
     <div><label> ФИО: <input type="text" name="name"/> </label></div>
     <div><label> Логин: <input type="text" name="username"/> </label></div>
     <div><label> Пароль: <input type="password" name="password"/> </label></div>
-    <div><label> Отдел: <input type="text" name="department"></label></div>
+    <div>
+        <label> Отдел:
+            <select name="department">
+            <option th:each="departmentOpt : ${T(pharma.lms.PharmaLMS.user.domain.Department).values()}"
+                    th:value="${departmentOpt}" th:text="${departmentOpt.departmentName}"></option>
+            </select>
+        </label>
+    </div>
     <div><label> Должность: <input type="text" name="jobTitle"/> </label></div>
     <div><input type="submit" value="Создать аккаунт"/></div>
 </form>
