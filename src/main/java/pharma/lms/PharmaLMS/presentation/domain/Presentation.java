@@ -1,6 +1,7 @@
 package pharma.lms.PharmaLMS.presentation.domain;
 
 import pharma.lms.PharmaLMS.course.domain.Course;
+import pharma.lms.PharmaLMS.quiz.domain.Quiz;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,6 +20,10 @@ public class Presentation {
 
     @ManyToMany(mappedBy = "presentations")
     private Set<Course> courses = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "quiz_id", referencedColumnName = "id")
+    private Quiz quiz;
 
     @Lob
     private byte[] data;
@@ -69,5 +74,13 @@ public class Presentation {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }

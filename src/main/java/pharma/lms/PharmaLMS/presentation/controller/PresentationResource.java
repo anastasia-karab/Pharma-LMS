@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pharma.lms.PharmaLMS.presentation.domain.Presentation;
 import pharma.lms.PharmaLMS.presentation.service.PresentationService;
+import pharma.lms.PharmaLMS.quiz.domain.Quiz;
+import pharma.lms.PharmaLMS.quiz.service.QuizService;
 
 @Controller
 @RequestMapping("/presentations")
 public class PresentationResource {
 
-    @Autowired
     private PresentationService presentationService;
+    private QuizService quizService;
+
+    @Autowired
+    public PresentationResource(PresentationService presentationService, QuizService quizService) {
+        this.presentationService = presentationService;
+        this.quizService = quizService;
+    }
 
     @GetMapping("/all")
     public String get(Model model) {
@@ -45,4 +53,20 @@ public class PresentationResource {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
+    @GetMapping("/{id}/quizzes/add")
+    public String addQuiz(@PathVariable("id") Long id,
+                          Model model) {
+        model.addAttribute("presentation", presentationService.getPresentationById(id));
+        List<Quiz> quizList = quizService.getQuizzes();
+        model.addAttribute("quizzes", quizList);
+
+        return "presentation/add-quiz";
+    }
+
+    @PostMapping("/newquiz/{pid}/{qid}")
+    public String chooseQuiz(@PathVariable("pid") Long presId,
+                             @PathVariable("qid") Long quizId) {
+        presentationService.addQuizToThePresentation(presId, quizId);
+        return "redirect:/presentations/all";
+    }
 }

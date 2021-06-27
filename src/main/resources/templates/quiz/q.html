@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Загрузить / скачать тесты</title>
+</head>
+<body>
+<div>
+  <h3>Загрузите тест</h3>
+  <form id="uploadFiles" name="uploadFiles" th:method="post" th:action=@{/quizzes/uploadFiles} encType="multipart/form-data">
+    <input type="file" name="files" multiple required />
+    <button type="submit">Добавить</button>
+  </form>
+</div>
+
+<div>
+  <h3>Список тестов</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Название</th>
+      <th>Скачать</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="quiz:${quizzes}">
+      <td th:text="${quiz.id}" />
+      <td th:text="${quiz.quizName}"/>
+      <td><a th:href="@{'/quizzes/downloadFile/' + ${quiz.id}}">Download</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

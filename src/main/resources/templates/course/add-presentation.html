@@ -2,20 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add presentation to the course</title>
+    <title>Добавить презентацию в курс</title>
 </head>
 <body>
 
 <div>
-    <h3>List of Presentations</h3>
+    <h3>Список презентаций</h3>
     <a th:href="@{'/course/find/' + ${course.id}}"
        th:text="${course.courseName + ', ' + course.department}">course</a>
     <table>
         <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Download Link</th>
+            <th>Название</th>
+            <th>Скачать</th>
         </tr>
         </thead>
         <tbody>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить тест в презентацию</title>
+</head>
+<body>
+
+<div>
+    <h3>Список тестов</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Скачать</th>
+            <th>Добавить в курс</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="quiz:${quizzes}">
+            <td th:text="${quiz.id}" />
+            <td th:text="${quiz.quizName}"/>
+            <td><a th:href="@{'/quizzes/downloadFile/' + ${quiz.id}}">Download</a></td>
+            <td><form th:action="@{'/presentations/newquiz/' + ${presentation.id} + '/' + ${quiz.id}}" method="post">
+                <input type="submit" value="Добавить в курс">
+            </form></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

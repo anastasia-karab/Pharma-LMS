@@ -2,25 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Presentation Upload / Download</title>
+    <title>Загрузить / скачать презентации</title>
 </head>
 <body>
 <div>
-    <h3>Upload Multiple Presentations</h3>
+    <h3>Выбрать презентацию</h3>
     <form id="uploadFiles" name="uploadFiles" th:method="post" th:action=@{/presentations/uploadFiles} encType="multipart/form-data">
         <input type="file" name="files" multiple required />
-        <button type="submit">Submit</button>
+        <button type="submit">Добавить</button>
     </form>
 </div>
 
 <div>
-    <h3>List of Presentations</h3>
+    <h3>Список презентаций</h3>
     <table>
         <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Download Link</th>
+            <th>Название</th>
+            <th>Скачать</th>
         </tr>
         </thead>
         <tbody>
@@ -28,9 +28,6 @@
             <td th:text="${doc.id}" />
             <td th:text="${doc.presName}"/>
             <td><a th:href="@{'/presentations/downloadFile/' + ${doc.id}}">Download</a></td>
-            <td><form th:action="@{'/course/' + ${doc.id} + '/newpres'}" method="post">
-                <input type="submit" value="Добавить в курс">
-            </form></td>
         </tr>
         </tbody>
     </table>
