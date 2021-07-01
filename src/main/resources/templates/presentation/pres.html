@@ -21,6 +21,7 @@
             <th>Id</th>
             <th>Название</th>
             <th>Скачать</th>
+            <th>Тест</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
             <td th:text="${doc.id}" />
             <td th:text="${doc.presName}"/>
             <td><a th:href="@{'/presentations/downloadFile/' + ${doc.id}}">Download</a></td>
+            <td><a th:href="@{'/presentations/' + ${doc.id} + '/quizzes/add'}">Add</a></td>
         </tr>
         </tbody>
     </table>
