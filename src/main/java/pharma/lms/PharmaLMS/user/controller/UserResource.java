@@ -1,11 +1,10 @@
 package pharma.lms.PharmaLMS.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pharma.lms.PharmaLMS.course.domain.Course;
 import pharma.lms.PharmaLMS.course.service.CourseService;
@@ -26,10 +25,11 @@ public class UserResource {
         this.courseService = courseService;
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String myProfile(@PathVariable("id") Long id, Model model) {
-        User user = userService.findUserById(id);
+    @GetMapping()
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String mine(@ModelAttribute("user") User user, Model model) {
+        String currentUsername = userService.getCurrentUserLogin();
+        user = userService.findUserByUsername(currentUsername);
         model.addAttribute("user", user);
 
         List<Course> courses = courseService.findAllCourses();
@@ -41,5 +41,4 @@ public class UserResource {
 
         return "user/user-profile";
     }
-
 }
