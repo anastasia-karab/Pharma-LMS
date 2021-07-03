@@ -1,8 +1,10 @@
 package pharma.lms.PharmaLMS.quiz.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import pharma.lms.PharmaLMS.presentation.domain.Presentation;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "quiz")
@@ -19,6 +21,10 @@ public class Quiz {
 
     @Lob
     private byte[] data;
+
+    @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER)
+    @JsonProperty("questions")
+    private List<Question> questions;
 
     public Quiz() {
     }
@@ -67,5 +73,13 @@ public class Quiz {
 
     public void setQuizType(String quizType) {
         this.quizType = quizType;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List questions) {
+        this.questions = questions;
     }
 }

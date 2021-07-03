@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+</head>
+<body>
+<div th:each="question : ${questionList}">
+    <p th:text="${question.question}">VALUE</p>
+    <div th:each="answer : ${question.answers}">
+        <p th:text="${answer}">VALUE</p>
+    </div>
+</div>
+</body>
+</html>
