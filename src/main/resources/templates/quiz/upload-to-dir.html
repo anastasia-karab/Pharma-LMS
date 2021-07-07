@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>New Course</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/quizzes/add}" th:object="${quiz}" enctype="multipart/form-data">
+  <label for="quizFile">Add quiz: </label>
+  <input type="file" th:field="*{quizFile}" id="quizFile"/>
+  <br/>
+
+  <input type="submit" value="Add"/>
+</form>
+
+</body>
+</html>

@@ -1,8 +1,10 @@
 package pharma.lms.PharmaLMS.quiz.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.web.multipart.MultipartFile;
 import pharma.lms.PharmaLMS.presentation.domain.Presentation;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,6 +27,13 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER)
     @JsonProperty("questions")
     private List<Question> questions;
+
+    private String quizFileDir;
+
+    @Lob
+    @Column(name = "dir", columnDefinition = "BLOB")
+    @Nullable
+    private MultipartFile quizFile;
 
     public Quiz() {
     }
@@ -79,7 +88,23 @@ public class Quiz {
         return questions;
     }
 
-    public void setQuestions(List questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public MultipartFile getQuizFile() {
+        return quizFile;
+    }
+
+    public void setQuizFile(MultipartFile quizFile) {
+        this.quizFile = quizFile;
+    }
+
+    public String getQuizFileDir() {
+        return quizFileDir;
+    }
+
+    public void setQuizFileDir(String quizFileDir) {
+        this.quizFileDir = quizFileDir;
     }
 }

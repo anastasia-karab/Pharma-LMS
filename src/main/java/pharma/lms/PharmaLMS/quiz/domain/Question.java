@@ -1,6 +1,6 @@
 package pharma.lms.PharmaLMS.quiz.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -8,7 +8,10 @@ import javax.persistence.*;
 @Table(name = "questions")
 public class Question {
     @Id
-    @JsonProperty("question")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
+    private Integer questionId;
+
     private String question;
     private String[] answers;
     private int correctIndex;
@@ -56,5 +59,13 @@ public class Question {
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
+    }
+
+    public Integer getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 }
