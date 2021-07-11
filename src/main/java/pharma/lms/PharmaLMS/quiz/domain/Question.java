@@ -14,7 +14,7 @@ public class Question {
 
     private String question;
     private String[] answers;
-    private int correctIndex;
+    private Integer correctIndex;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "quiz_id")
@@ -45,11 +45,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public int getCorrectIndex() {
+    public Integer getCorrectIndex() {
         return correctIndex;
     }
 
-    public void setCorrectIndex(int correctIndex) {
+    public void setCorrectIndex(Integer correctIndex) {
         this.correctIndex = correctIndex;
     }
 

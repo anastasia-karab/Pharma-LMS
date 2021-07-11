@@ -14,7 +14,6 @@ import pharma.lms.PharmaLMS.quiz.domain.Question;
 import pharma.lms.PharmaLMS.quiz.domain.Quiz;
 import pharma.lms.PharmaLMS.quiz.service.QuizService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -57,53 +56,27 @@ public class QuizResource {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
-    @GetMapping("/quiz/{quizId}")
-    public String doQuiz(@PathVariable("quizId") Long quizId,
-                         Model model) throws FileNotFoundException {
-        Quiz quizName = quizService.getFile(quizId).get();
-
-        Quiz parsedQuiz = quizService.parse(quizName.getQuizName());
-        List<Question> questionList = parsedQuiz.getQuestions();
-        model.addAttribute("questionList", questionList);
-
-        return "quiz/questions";
-    }
-
     @GetMapping("/test/{quizId}")
-    public String showQuestions(@PathVariable("quizId") Long quizId,
+    public String showQuestionsFromServlet(@PathVariable("quizId") Long quizId,
                                 Model model) throws FileNotFoundException {
         String quizName = quizService.getQuizById(quizId).getQuizName();
 
         Quiz quiz = quizService.parse(uploadPath + "/" + quizName);
         List<Question> questionList = quiz.getQuestions();
-        model.addAttribute("questionList", questionList);
 
-        return "quiz/questions";
-    }
-
-    @PostMapping("/submit")
-    public String submitQuiz(HttpServletRequest request) {
-        int score = 0;
-        String[] questionIds = request.getParameterValues("questionId");
-        boolean isAnswerCorrect = false;
-        for (String questionId : questionIds) {
-            try {
-                isAnswerCorrect = quizService.isAnswerCorrect(Integer.valueOf(questionId));
-                // needs to be resolved
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
-
-            if (isAnswerCorrect == true) {
-                score++;
-            }
+        for (int i = 0; i < questionList.size(); i++) {
+            String questionName = "question" + i;
+            Question question = questionList.get(i);
+            model.addAttribute(questionName, question);
         }
-            request.setAttribute("score", score);
-            return "quiz/result";
+
+        model.addAttribute("quizId", quizId);
+
+        return "quiz/servlet/servlet-questions";
     }
 
     @GetMapping("/add")
-    public String newPresentation(Model model) {
+    public String newQuiz(Model model) {
         model.addAttribute("quiz", new Quiz());
         return "quiz/upload-to-dir";
     }
@@ -133,5 +106,4 @@ public class QuizResource {
         quizService.saveFile(quizFile);
         return "redirect:/quizzes/all";
     }
-
 }

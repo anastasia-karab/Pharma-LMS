@@ -56,16 +56,17 @@ public class QuizService {
         return quizRepo.getById(id);
     }
 
-    public boolean isAnswerCorrect(Integer questionId) {
-        Question question = questionRepo.getById(questionId);
-        String[] answers = question.getAnswers();
-        int correctIndex = question.getCorrectIndex();
-        for (String a : answers) {
-            if (a.equals(answers[correctIndex])) {
-                return true;
-            }
+    public Integer[] getCorrectQuizAnswers(Long quizId) {
+        Quiz quiz = getQuizById(quizId);
+        List<Question> questions = quiz.getQuestions();
+        Integer[] correctAnswers = new Integer[2];
+
+        for (int i = 0; i < questions.size(); i++) {
+            Integer correctIndex = questions.get(i).getCorrectIndex();
+            correctAnswers[i] = correctIndex;
         }
-        return false;
+
+        return correctAnswers;
     }
 }
 
