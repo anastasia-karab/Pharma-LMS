@@ -6,24 +6,27 @@
 </head>
 <body>
 
-<form th:method="get" th:action="@{'/your_score'}">
-    <input type="hidden" name="quizId" value="${quizId}">
+<form th:action="@{'/your_score'}" method="get">
+    <input id="quizId" name="quizId" type="hidden" th:value="${id}">
 
     <label th:text="${question0.question}"></label><br>
+        <input name="correctIndex0" type="hidden" th:value="${question0.correctIndex}">
     <p th:each="answer : ${question0.answers}">
-        <input type="radio" name="${question0.questionId}" value="${answer}" th:text="${answer}"><br>
+        <input type="radio" name="question0" th:value="${answer}" th:text="${answer}"><br>
     </p>
     <br><br>
 
     <label th:text="${question1.question}"></label><br>
+    <input name="correctIndex1" type="hidden" th:value="${question1.correctIndex}">
     <p th:each="answer : ${question1.answers}">
-        <input type="radio" name="${question1.questionId}" value="${answer}" th:text="${answer}"><br>
+        <input type="radio" name="question1" th:value="${answer}" th:text="${answer}"><br>
     </p>
     <br><br>
 
     <label th:text="${question2.question}"></label><br>
+    <input name="correctIndex2" type="hidden" th:value="${question2.correctIndex}">
     <p th:each="answer : ${question2.answers}">
-        <input type="radio" name="${question2.questionId}" value="${answer}" th:text="${answer}"><br>
+        <input type="radio" name="question2" th:value="${answer}" th:text="${answer}"><br>
     </p>
     <br><br>
 

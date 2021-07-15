@@ -28,7 +28,7 @@
       <td th:text="${quiz.id}" />
       <td th:text="${quiz.quizName}"/>
       <td><a th:href="@{'/quizzes/downloadFile/' + ${quiz.id}}">Download</a></td>
-      <td><a th:href="@{'/quizzes/test/' + ${quiz.id}}">Start</a></td>
+      <td><a th:href="@{'/quizzes/test?quizId=' + ${quiz.id}}">Start</a></td>
     </tr>
     </tbody>
   </table>

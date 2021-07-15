@@ -56,9 +56,9 @@ public class QuizResource {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
-    @GetMapping("/test/{quizId}")
-    public String showQuestionsFromServlet(@PathVariable("quizId") Long quizId,
-                                Model model) throws FileNotFoundException {
+    @GetMapping("/test")
+    public String doQuiz(@RequestParam("quizId") Long quizId,
+                                           Model model) throws FileNotFoundException {
         String quizName = quizService.getQuizById(quizId).getQuizName();
 
         Quiz quiz = quizService.parse(uploadPath + "/" + quizName);
@@ -70,7 +70,7 @@ public class QuizResource {
             model.addAttribute(questionName, question);
         }
 
-        model.addAttribute("quizId", quizId);
+        model.addAttribute("id", quizId);
 
         return "quiz/servlet/servlet-questions";
     }

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import pharma.lms.PharmaLMS.quiz.domain.Question;
 import pharma.lms.PharmaLMS.quiz.domain.Quiz;
 import pharma.lms.PharmaLMS.quiz.repo.QuestionRepo;
 import pharma.lms.PharmaLMS.quiz.repo.QuizRepo;
@@ -54,19 +53,6 @@ public class QuizService {
 
     public Quiz getQuizById(Long id) {
         return quizRepo.getById(id);
-    }
-
-    public Integer[] getCorrectQuizAnswers(Long quizId) {
-        Quiz quiz = getQuizById(quizId);
-        List<Question> questions = quiz.getQuestions();
-        Integer[] correctAnswers = new Integer[2];
-
-        for (int i = 0; i < questions.size(); i++) {
-            Integer correctIndex = questions.get(i).getCorrectIndex();
-            correctAnswers[i] = correctIndex;
-        }
-
-        return correctAnswers;
     }
 }
 
