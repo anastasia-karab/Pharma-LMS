@@ -10,17 +10,17 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
-    private Integer questionId;
+    private Long questionId;
 
     private String question;
     private String[] answers;
-    private Integer correctIndex;
+    private Long correctIndex;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
-    public Question(String question, String[] answers, int correctIndex) {
+    public Question(String question, String[] answers, Long correctIndex) {
         this.question = question;
         this.answers = answers;
         this.correctIndex = correctIndex;
@@ -45,11 +45,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public Integer getCorrectIndex() {
+    public Long getCorrectIndex() {
         return correctIndex;
     }
 
-    public void setCorrectIndex(Integer correctIndex) {
+    public void setCorrectIndex(Long correctIndex) {
         this.correctIndex = correctIndex;
     }
 
@@ -61,11 +61,11 @@ public class Question {
         this.quiz = quiz;
     }
 
-    public Integer getQuestionId() {
+    public Long getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(Integer questionId) {
+    public void setQuestionId(Long questionId) {
         this.questionId = questionId;
     }
 }

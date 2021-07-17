@@ -1,11 +1,17 @@
 package pharma.lms.PharmaLMS.quiz.servlet;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import pharma.lms.PharmaLMS.quiz.domain.Question;
 import pharma.lms.PharmaLMS.quiz.domain.Quiz;
 import pharma.lms.PharmaLMS.quiz.service.QuizService;
+import pharma.lms.PharmaLMS.result.domain.UserQuizResult;
+import pharma.lms.PharmaLMS.result.repo.UserQuizResultRepo;
+import pharma.lms.PharmaLMS.result.service.UserQuizResultService;
+import pharma.lms.PharmaLMS.user.domain.User;
+import pharma.lms.PharmaLMS.user.service.UserService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -22,6 +28,12 @@ public class QuizServlet extends HttpServlet {
 
     @Autowired
     private QuizService quizService;
+
+    @Autowired
+    private UserQuizResultService userQuizResultService;
+
+    @Autowired
+    private UserService userService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -61,5 +73,18 @@ public class QuizServlet extends HttpServlet {
             }
         }
         out.println("<h1>Ваш результат: " + count + " из 3</h1>");
+
+        UserQuizResult result = getUserQuizResult(quizId);
+        userQuizResultService.addResult(result);
+    }
+
+    private UserQuizResult getUserQuizResult(Long quizId) {
+        String currentUsername = userService.getCurrentUserLogin();
+        User user = userService.findUserByUsername(currentUsername);
+
+        Quiz quiz = quizService.getQuizById(quizId);
+
+        UserQuizResult result = new UserQuizResult(user, quiz, count);
+        return result;
     }
 }

@@ -3,6 +3,7 @@ package pharma.lms.PharmaLMS.quiz.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.multipart.MultipartFile;
 import pharma.lms.PharmaLMS.presentation.domain.Presentation;
+import pharma.lms.PharmaLMS.result.domain.UserQuizResult;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
@@ -34,6 +35,9 @@ public class Quiz {
     @Column(name = "dir", columnDefinition = "BLOB")
     @Nullable
     private MultipartFile quizFile;
+
+    @OneToOne(mappedBy = "quiz")
+    private UserQuizResult result;
 
     public Quiz() {
     }
@@ -106,5 +110,13 @@ public class Quiz {
 
     public void setQuizFileDir(String quizFileDir) {
         this.quizFileDir = quizFileDir;
+    }
+
+    public UserQuizResult getResult() {
+        return result;
+    }
+
+    public void setResult(UserQuizResult result) {
+        this.result = result;
     }
 }

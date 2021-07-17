@@ -1,6 +1,9 @@
 package pharma.lms.PharmaLMS.user.domain;
 
+import pharma.lms.PharmaLMS.result.domain.UserQuizResult;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -20,6 +23,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private UserRole userRole;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserQuizResult> userQuizResults;
 
     public User() {
     }
@@ -104,4 +110,11 @@ public class User {
         this.jobTitle = jobTitle;
     }
 
+    public List<UserQuizResult> getUserQuizResults() {
+        return userQuizResults;
+    }
+
+    public void setUserQuizResults(List<UserQuizResult> userQuizResults) {
+        this.userQuizResults = userQuizResults;
+    }
 }

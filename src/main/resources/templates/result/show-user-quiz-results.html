@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты</title>
+</head>
+<body>
+<div th:each="result : ${results}">
+    <p th:text="${result.quiz + ' : ' + result.score}">VALUE</p>
+</div>
+</body>
+</html>
