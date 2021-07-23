@@ -10,7 +10,7 @@
 <div th:each="presentation : ${presentations}">
   <a th:href="@{'/presentations/downloadFile/' + ${presentation.id}}"
      th:text="${presentation.presName}">presentation</a>
-  <a th:href="@{'/quizzes/test/' + ${presentation.quiz.id}}"
+  <a th:href="@{'/quizzes/test?quizId=' + ${presentation.quiz.id}}"
      th:text="${presentation.quiz.quizName}">quiz</a>
 </div>
 

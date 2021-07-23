@@ -1,10 +1,18 @@
 package pharma.lms.PharmaLMS.result.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pharma.lms.PharmaLMS.quiz.domain.Quiz;
 import pharma.lms.PharmaLMS.user.domain.User;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "results")
 public class UserQuizResult {
@@ -22,44 +30,9 @@ public class UserQuizResult {
 
     private int score;
 
-    public UserQuizResult() {
-    }
-
     public UserQuizResult(User user, Quiz quiz, int score) {
         this.user = user;
         this.quiz = quiz;
-        this.score = score;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
         this.score = score;
     }
 }

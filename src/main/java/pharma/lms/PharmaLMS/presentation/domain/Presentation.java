@@ -1,5 +1,9 @@
 package pharma.lms.PharmaLMS.presentation.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pharma.lms.PharmaLMS.course.domain.Course;
 import pharma.lms.PharmaLMS.quiz.domain.Quiz;
 
@@ -7,6 +11,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name="pres")
 public class Presentation {
@@ -28,59 +36,9 @@ public class Presentation {
     @Lob
     private byte[] data;
 
-    public Presentation() {}
-
     public Presentation(String presName, String presType, byte[] data) {
         this.presName = presName;
         this.presType = presType;
         this.data = data;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPresName() {
-        return presName;
-    }
-
-    public void setPresName(String presName) {
-        this.presName = presName;
-    }
-
-    public String getPresType() {
-        return presType;
-    }
-
-    public void setPresType(String presType) {
-        this.presType = presType;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
-    }
-
-    public Set<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
-    }
-
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
     }
 }

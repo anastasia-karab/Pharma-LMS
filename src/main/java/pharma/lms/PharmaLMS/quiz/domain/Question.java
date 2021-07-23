@@ -1,9 +1,17 @@
 package pharma.lms.PharmaLMS.quiz.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "questions")
 public class Question {
@@ -24,48 +32,5 @@ public class Question {
         this.question = question;
         this.answers = answers;
         this.correctIndex = correctIndex;
-    }
-
-    public Question() {
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public String[] getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(String[] answers) {
-        this.answers = answers;
-    }
-
-    public Long getCorrectIndex() {
-        return correctIndex;
-    }
-
-    public void setCorrectIndex(Long correctIndex) {
-        this.correctIndex = correctIndex;
-    }
-
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
-    public Long getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
     }
 }

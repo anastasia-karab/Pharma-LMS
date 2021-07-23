@@ -1,5 +1,9 @@
 package pharma.lms.PharmaLMS.course.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pharma.lms.PharmaLMS.presentation.domain.Presentation;
 import pharma.lms.PharmaLMS.user.domain.Department;
 
@@ -7,6 +11,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Course {
     @Id
@@ -26,44 +34,9 @@ public class Course {
     @Enumerated(EnumType.STRING)
     private Department department;
 
-    public Course() {
-    }
-
     public Course(String courseName,
                   Department department) {
         this.courseName = courseName;
         this.department = department;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Set<Presentation> getPresentations() {
-        return presentations;
-    }
-
-    public void setPresentations(Set<Presentation> presentations) {
-        this.presentations = presentations;
     }
 }
