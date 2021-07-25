@@ -8,15 +8,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
-import java.util.List;
-
-import static pharma.lms.PharmaLMS.user.domain.UserPermissions.COURSE_ADD;
-import static pharma.lms.PharmaLMS.user.domain.UserPermissions.PRESENTATION_ADD;
 import static pharma.lms.PharmaLMS.user.domain.UserRole.ADMIN;
 import static pharma.lms.PharmaLMS.user.domain.UserRole.USER;
 
@@ -40,10 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/", "/registration").permitAll()
-                    .antMatchers(HttpMethod.GET, "/course/**", "/presentations/**").hasAnyRole(USER.name(), ADMIN.name())
-                    .antMatchers(HttpMethod.POST, "/course/**", "/presentations/**").hasRole(ADMIN.name())
-                    .antMatchers(HttpMethod.DELETE, "/course/**").hasRole(ADMIN.name())
-                    .antMatchers(HttpMethod.PUT, "/course/**").hasRole(ADMIN.name())
+                    .antMatchers(HttpMethod.GET, "/course/**", "/presentations/**",
+                            "/quizzes/**").hasAnyRole(USER.name(), ADMIN.name())
+                    .antMatchers(HttpMethod.POST, "/course/**", "/presentations/**",
+                            "/quizzes/uploadFiles", "/quizzes/add").hasRole(ADMIN.name())
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -73,4 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("SELECT username, user_role FROM users WHERE username=?")
                 .rolePrefix("ROLE_");
     }
+
+
 }

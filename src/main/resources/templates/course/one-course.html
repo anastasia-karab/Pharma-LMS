@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Курс</title>
@@ -9,17 +11,21 @@
   <p th:text="${course.department}">VALUE</p>
   </form>
 
-  <a th:href="@{'/course/' + ${course.id} + '/presentations/add'}"
-     th:text="Добавить">Add</a>
+  <div sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{'/course/' + ${course.id} + '/presentations/add'}"
+       th:text="Добавить">Add</a>
 
-  <a th:href="@{'/course/' + ${course.id} + '/edit'}"
-     th:text="Обновить">Edit</a>
+    <a th:href="@{'/course/' + ${course.id} + '/edit'}"
+       th:text="Обновить">Edit</a>
+  </div>
 
   <a th:href="@{'/course/' + ${course.id} + '/presentations'}"
      th:text="Презентации">Pres</a>
 
-  <form th:method="DELETE" th:action="@{'/course/' + ${course.id}}">
-    <input type="submit" value="Удалить"/>
-  </form>
+  <div sec:authorize="hasRole('ROLE_ADMIN')">
+    <form th:method="DELETE" th:action="@{'/course/' + ${course.id}}">
+      <input type="submit" value="Удалить"/>
+    </form>
+  </div>
 </body>
 </html>

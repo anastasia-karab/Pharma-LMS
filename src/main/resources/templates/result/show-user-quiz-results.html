@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:each="result : ${results}">
-    <p th:text="${result.quiz + ' : ' + result.score}">VALUE</p>
+    <p th:text="${result.quiz.quizName + ' : ' + result.score}">VALUE</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Все курсы</title>
@@ -14,7 +16,8 @@
     <br/>
     <hr/>
 
-    <a href="/course/add">Добавить новый курс</a>
-
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/course/add">Добавить новый курс</a>
+    </div>
 </body>
 </html>

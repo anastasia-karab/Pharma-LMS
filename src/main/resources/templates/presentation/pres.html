@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Загрузить / скачать презентации</title>
 </head>
 <body>
-<div>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
     <h3>Выбрать презентацию</h3>
     <form id="uploadFiles" name="uploadFiles" th:method="post" th:action=@{/presentations/uploadFiles} encType="multipart/form-data">
         <input type="file" name="files" multiple required />

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <title>Загрузить / скачать тесты</title>
 </head>
 <body>
-<div>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
   <h3>Загрузите тест</h3>
   <form id="uploadFiles" name="uploadFiles" th:method="post" th:action=@{/quizzes/uploadFiles} encType="multipart/form-data">
     <input type="file" name="files" multiple required />

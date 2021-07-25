@@ -1,6 +1,7 @@
 package pharma.lms.PharmaLMS.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,6 @@ public class UserResource {
     }
 
     @GetMapping()
-//    @PreAuthorize("hasRole('ROLE_USER')")
     public String mine(@ModelAttribute("user") User user, Model model) {
         String currentUsername = userService.getCurrentUserLogin();
         user = userService.findUserByUsername(currentUsername);
