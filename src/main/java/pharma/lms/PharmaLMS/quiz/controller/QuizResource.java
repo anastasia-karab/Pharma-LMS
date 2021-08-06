@@ -106,4 +106,9 @@ public class QuizResource {
         quizService.saveFile(quizFile);
         return "redirect:/quizzes/all";
     }
+
+    @GetMapping("/create")
+    public String createNewQuiz() {
+        return "quiz/servlet/servlet-post-new";
+    }
 }
