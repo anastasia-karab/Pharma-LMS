@@ -29,6 +29,11 @@ public class UserResource {
     @GetMapping()
     public String mine(@ModelAttribute("user") User user, Model model) {
         String currentUsername = userService.getCurrentUserLogin();
+
+        if (currentUsername == "admin") {
+            return "admin/admin-page";
+        }
+
         user = userService.findUserByUsername(currentUsername);
         model.addAttribute("user", user);
 

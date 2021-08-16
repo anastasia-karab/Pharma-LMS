@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ</title>
+</head>
+<body>
+
+<div>
+    <a href="/course/add">Добавить новый курс</a>
+</div>
+<br><br>
+
+<div>
+    <a href="/presentations/all">Добавить новую презентацию</a>
+</div>
+<br><br>
+
+<div>
+    <a href="/quizzes/create">Добавить новый тест</a>
+    <a href="/quizzes/add">Загрузить файл теста</a>
+</div>
+<br><br>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+
+</body>
+</html>
