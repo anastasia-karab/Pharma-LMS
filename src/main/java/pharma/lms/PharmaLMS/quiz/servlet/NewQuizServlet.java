@@ -3,6 +3,7 @@ package pharma.lms.PharmaLMS.quiz.servlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import pharma.lms.PharmaLMS.quiz.service.QuizService;
 
@@ -45,7 +46,7 @@ public class NewQuizServlet extends HttpServlet {
         FileWriter fileWriter = new FileWriter(quizFile);
         fileWriter.write("{\n" +
                 "\"questions\": [");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             fileWriter.append("\n{" +
                     "\n\"question\": \"" + request.getParameter("question" + i) + "\"," +
                     "\n\"answers\": [" +
@@ -55,7 +56,7 @@ public class NewQuizServlet extends HttpServlet {
                     "\n]," +
                     "\n\"correctIndex\": " + request.getParameter("correctIndex" + i) +
                     "\n}");
-            if (i != 2) {
+            if (i != 9) {
                 fileWriter.append(",");
             }
         }

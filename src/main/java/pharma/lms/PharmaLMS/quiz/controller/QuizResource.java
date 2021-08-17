@@ -17,6 +17,7 @@ import pharma.lms.PharmaLMS.quiz.service.QuizService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -63,12 +64,7 @@ public class QuizResource {
 
         Quiz quiz = quizService.parse(uploadPath + "/" + quizName);
         List<Question> questionList = quiz.getQuestions();
-
-        for (int i = 0; i < questionList.size(); i++) {
-            String questionName = "question" + i;
-            Question question = questionList.get(i);
-            model.addAttribute(questionName, question);
-        }
+        model.addAttribute("questions", questionList);
 
         model.addAttribute("id", quizId);
 
@@ -108,7 +104,10 @@ public class QuizResource {
     }
 
     @GetMapping("/create")
-    public String createNewQuiz() {
+    public String createNewQuiz(Model model) {
+        String[] emptyQuestions = { " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+        model.addAttribute("questions", emptyQuestions);
+
         return "quiz/servlet/servlet-post-new";
     }
 }

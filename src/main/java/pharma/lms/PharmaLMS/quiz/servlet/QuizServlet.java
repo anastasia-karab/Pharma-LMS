@@ -63,14 +63,14 @@ public class QuizServlet extends HttpServlet {
         String correctIndex;
 
         for (int i = 0; i < questions.size(); i++) {
-            question = request.getParameter("question" + i);
-            correctIndex = request.getParameter("correctIndex" + i);
+            question = request.getParameter(String.valueOf(i));
+            correctIndex = request.getParameter(i + "correctIndex");
 
             if (questions.get(i).getAnswers()[Integer.parseInt(correctIndex)].equals(question)) {
                 count++;
             }
         }
-        out.println("<h1>Ваш результат: " + count + " из 3</h1>");
+        out.println("<h1>Ваш результат: " + count + " из 10</h1>");
 
         UserQuizResult result = getUserQuizResult(quizId, out);
         userQuizResultService.addResult(result);

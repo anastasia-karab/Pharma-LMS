@@ -8,27 +8,15 @@
 
 <form th:action="@{'/post_new_quiz'}" method="get">
     <div><label><input name="quiz_name" type="text"></label></div>
-    <br><br>
-    <div><label> Вопрос: <input name="question0" type="text"></label></div>
-    <div><label> Вариант 1: <input name="0answer1" type="text"></label></div>
-    <div><label> Вариант 2: <input name="0answer2" type="text"></label></div>
-    <div><label> Вариант 3: <input name="0answer3" type="text"></label></div>
-    <div><label> Правильный ответ: <input name="correctIndex0" type="text"></label></div>
-    <br><br>
 
-    <div><label> Вопрос: <input name="question1" type="text"></label></div>
-    <div><label> Вариант 1: <input name="1answer1" type="text"></label></div>
-    <div><label> Вариант 2: <input name="1answer2" type="text"></label></div>
-    <div><label> Вариант 3: <input name="1answer3" type="text"></label></div>
-    <div><label> Правильный ответ: <input name="correctIndex1" type="text"></label></div>
-    <br><br>
-
-    <div><label> Вопрос: <input name="question2" type="text"></label></div>
-    <div><label> Вариант 1: <input name="2answer1" type="text"></label></div>
-    <div><label> Вариант 2: <input name="2answer2" type="text"></label></div>
-    <div><label> Вариант 3: <input name="2answer3" type="text"></label></div>
-    <div><label> Правильный ответ: <input name="correctIndex2" type="text"></label></div>
-    <br><br>
+    <div th:each="question, iterStat : ${questions}" th:if="${iterStat.index}<10">
+        <div><label> Вопрос: <input th:name="${'question' + iterStat.index}" type="text"></label></div>
+        <div><label> Вариант 1: <input th:name="${iterStat.index + 'answer1'}" type="text"></label></div>
+        <div><label> Вариант 2: <input th:name="${iterStat.index + 'answer2'}" type="text"></label></div>
+        <div><label> Вариант 3: <input th:name="${iterStat.index + 'answer3'}" type="text"></label></div>
+        <div><label> Правильный ответ: <input th:name="${'correctIndex' + iterStat.index}" type="text"></label></div>
+        <br><br>
+    </div>
 
     <button type="submit" value="Submit">Submit</button>
 </form>

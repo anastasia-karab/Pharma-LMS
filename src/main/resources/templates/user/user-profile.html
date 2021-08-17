@@ -13,6 +13,10 @@
     <a th:href="@{'/course/find/' + ${course.id}}"
        th:text="${course.courseName}">course</a>
 </div>
+<br><br>
+
+<a th:href="@{/results}">Посмотреть свои результаты тестов</a>
+<br><br>
 
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти"/>
