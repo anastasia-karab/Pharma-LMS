@@ -16,10 +16,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name="pres")
+@Table(name = "presentations")
 public class Presentation {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "presentation_id")
     private Long id;
 

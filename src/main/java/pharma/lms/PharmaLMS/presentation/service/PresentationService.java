@@ -1,5 +1,6 @@
 package pharma.lms.PharmaLMS.presentation.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,8 +14,8 @@ import pharma.lms.PharmaLMS.quiz.repo.QuizRepo;
 
 @Service
 public class PresentationService {
-    private PresentationRepo presentationRepo;
-    private QuizRepo quizRepo;
+    private final PresentationRepo presentationRepo;
+    private final QuizRepo quizRepo;
 
     @Autowired
     public PresentationService(PresentationRepo presentationRepo, QuizRepo quizRepo) {
@@ -22,16 +23,11 @@ public class PresentationService {
         this.quizRepo = quizRepo;
     }
 
-    public Presentation saveFile(MultipartFile file) {
+    public Presentation saveFile(MultipartFile file) throws IOException {
         String docName = file.getOriginalFilename();
-        try {
-            Presentation doc = new Presentation(docName, file.getContentType(), file.getBytes());
-            return presentationRepo.save(doc);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        Presentation doc = new Presentation(docName, file.getContentType(), file.getBytes());
+        return presentationRepo.save(doc);
     }
 
     public Optional<Presentation> getFile(Long fileId) {

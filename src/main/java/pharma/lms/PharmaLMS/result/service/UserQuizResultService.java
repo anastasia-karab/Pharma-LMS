@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public class UserQuizResultService {
-    private UserQuizResultRepo userQuizResultRepo;
+    private final UserQuizResultRepo userQuizResultRepo;
 
     @Autowired
     public UserQuizResultService(UserQuizResultRepo userQuizResultRepo) {

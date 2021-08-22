@@ -1,6 +1,5 @@
 package pharma.lms.PharmaLMS.course.service;
 
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pharma.lms.PharmaLMS.course.domain.Course;
@@ -11,7 +10,6 @@ import pharma.lms.PharmaLMS.presentation.repo.PresentationRepo;
 import pharma.lms.PharmaLMS.user.domain.Department;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -47,10 +45,7 @@ public class CourseService {
 
     public List<Course> findCoursesByDepartment(Department department) {
         return courseRepo
-                .findAll()
-                .stream()
-                .filter(course -> course.getDepartment() == department)
-                .collect(Collectors.toList());
+                .getCoursesByDepartment(department);
     }
 
     public void addPresentationToTheCourse(Long courseId,

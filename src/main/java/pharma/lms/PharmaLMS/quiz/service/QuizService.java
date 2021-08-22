@@ -5,34 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pharma.lms.PharmaLMS.quiz.domain.Quiz;
-import pharma.lms.PharmaLMS.quiz.repo.QuestionRepo;
 import pharma.lms.PharmaLMS.quiz.repo.QuizRepo;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class QuizService {
-    private QuizRepo quizRepo;
-    private QuestionRepo questionRepo;
+    private final QuizRepo quizRepo;
 
     @Autowired
-    public QuizService(QuizRepo quizRepo, QuestionRepo questionRepo) {
+    public QuizService(QuizRepo quizRepo) {
         this.quizRepo = quizRepo;
-        this.questionRepo = questionRepo;
     }
 
-    public Quiz saveFile(MultipartFile file) {
+    public Quiz saveFile(MultipartFile file) throws IOException {
         String docName = file.getOriginalFilename();
-        try {
-            Quiz doc = new Quiz(docName, file.getContentType(), file.getBytes());
-            return quizRepo.save(doc);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        Quiz doc = new Quiz(docName, file.getContentType(), file.getBytes());
+        return quizRepo.save(doc);
     }
 
     public Optional<Quiz> getFile(Long fileId) {

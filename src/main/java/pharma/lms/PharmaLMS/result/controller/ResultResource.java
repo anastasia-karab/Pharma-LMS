@@ -15,8 +15,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/results")
 public class ResultResource {
-    private UserQuizResultService userQuizResultService;
-    private UserService userService;
+    private final UserQuizResultService userQuizResultService;
+    private final UserService userService;
 
     @Autowired
     public ResultResource(UserQuizResultService userQuizResultService,

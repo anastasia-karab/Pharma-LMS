@@ -27,6 +27,7 @@ public class CourseResource {
         this.presentationService = presentationService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
     public String getAllCourses(Model model) {
         model.addAttribute("courses", courseService.findAllCourses());
@@ -48,6 +49,7 @@ public class CourseResource {
         return "course/show-course-presentations";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/add")
     public String newCourse(Model model) {
         model.addAttribute("course", new Course());
@@ -65,6 +67,7 @@ public class CourseResource {
         return "redirect:/course/all";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}/edit")
     public String editCourse(@PathVariable("id") Long id,
                        Model model) {
@@ -90,6 +93,7 @@ public class CourseResource {
         return "redirect:/course/all";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}/presentations/add")
     public String addPresentation(@PathVariable("id") Long id,
                                   Model model) {
@@ -100,6 +104,7 @@ public class CourseResource {
         return "/course/add-presentation";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/newpres/{cid}/{pid}")
     public String choosePresentation(@PathVariable("cid") Long courseId,
                                      @PathVariable("pid") Long presId) {

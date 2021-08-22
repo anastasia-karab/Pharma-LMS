@@ -1,5 +1,6 @@
 package pharma.lms.PharmaLMS.presentation.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +22,8 @@ import pharma.lms.PharmaLMS.quiz.service.QuizService;
 @RequestMapping("/presentations")
 public class PresentationResource {
 
-    private PresentationService presentationService;
-    private QuizService quizService;
+    private final PresentationService presentationService;
+    private final QuizService quizService;
 
     @Autowired
     public PresentationResource(PresentationService presentationService, QuizService quizService) {
@@ -29,15 +31,16 @@ public class PresentationResource {
         this.quizService = quizService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
-    public String get(Model model) {
+    public String getAllPresentations(Model model) {
         List<Presentation> docs = presentationService.getFiles();
         model.addAttribute("docs", docs);
         return "presentation/pres";
     }
 
     @PostMapping("/uploadFiles")
-    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) throws IOException {
         for (MultipartFile file: files) {
             presentationService.saveFile(file);
 
@@ -45,7 +48,7 @@ public class PresentationResource {
         return "redirect:/presentations/all";
     }
     @GetMapping("/downloadFile/{fileId}")
-    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long fileId){
+    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long fileId) {
         Presentation doc = presentationService.getFile(fileId).get();
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(doc.getPresType()))
@@ -53,6 +56,7 @@ public class PresentationResource {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}/quizzes/add")
     public String addQuiz(@PathVariable("id") Long id,
                           Model model) {

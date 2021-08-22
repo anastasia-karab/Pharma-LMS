@@ -16,6 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "courses")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +24,7 @@ public class Course {
     private Long id;
     private String courseName;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "course_presentations",
             joinColumns = { @JoinColumn(name = "course_id") },

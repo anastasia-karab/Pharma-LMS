@@ -6,6 +6,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,12 @@ import pharma.lms.PharmaLMS.quiz.service.QuizService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/quizzes")
 public class QuizResource {
-    private QuizService quizService;
+    private final QuizService quizService;
 
     @Autowired
     public QuizResource(QuizService quizService) {
@@ -33,15 +33,17 @@ public class QuizResource {
     @Value("${upload.path}")
     private String uploadPath;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
-    public String get(Model model) {
+    public String getAllQuizzes(Model model) {
         List<Quiz> quizzes = quizService.getQuizzes();
         model.addAttribute("quizzes", quizzes);
         return "quiz/q";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/uploadFiles")
-    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) throws IOException {
         for (MultipartFile file: files) {
             quizService.saveFile(file);
         }
@@ -71,6 +73,7 @@ public class QuizResource {
         return "quiz/servlet/servlet-questions";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/add")
     public String newQuiz(Model model) {
         model.addAttribute("quiz", new Quiz());
@@ -103,6 +106,7 @@ public class QuizResource {
         return "redirect:/quizzes/all";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/create")
     public String createNewQuiz(Model model) {
         String[] emptyQuestions = { " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
