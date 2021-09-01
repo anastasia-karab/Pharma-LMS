@@ -39,4 +39,12 @@ public class UserQuizResultService {
             return true;
         }
     }
+
+    public UserQuizResult getUserQuizResultById(Long id) {
+        return userQuizResultRepo.getById(id);
+    }
+
+    public void deleteUserQuizResult(UserQuizResult result) {
+        userQuizResultRepo.delete(result);
+    }
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Отправить сообщение пользователю</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{'/pharmalms/mycourses/users/results/' + ${id} + '/message'}" th:object="${message}">
+    <label for="message">Сообщение: </label>
+    <br/>
+    <textarea rows="20" cols="60" th:field="*{content}" id="message"></textarea>
+    <br/>
+
+    <input type="submit" value="Отправить"/>
+</form>
+
+</body>
+</html>

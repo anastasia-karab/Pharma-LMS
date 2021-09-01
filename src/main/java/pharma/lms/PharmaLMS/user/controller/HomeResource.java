@@ -10,13 +10,12 @@ import pharma.lms.PharmaLMS.user.domain.User;
 import pharma.lms.PharmaLMS.user.domain.UserRole;
 import pharma.lms.PharmaLMS.user.service.UserService;
 
-import java.util.Collections;
 import java.util.Map;
 
 @Controller
 @RequestMapping(path = "/")
 public class HomeResource {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public HomeResource(UserService userService) {

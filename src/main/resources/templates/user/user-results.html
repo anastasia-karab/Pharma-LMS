@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты пользователя</title>
+</head>
+<body>
+
+<body>
+<div th:each="result : ${results}">
+    <p th:text="${result.quiz.quizName + ' : ' + result.score}">VALUE</p>
+    <form th:method="DELETE" th:action="@{'/pharmalms/mycourses/users/results/' + ${result.id}}">
+        <input type="submit" value="Удалить">
+    </form>
+</div>
+<br>
+<div>
+    <a th:href="@{'/pharmalms/mycourses/users/results/' + ${id} + '/message'}">Отправить сообщение</a>
+</div>
+
+
+</body>
+
+</body>
+</html>

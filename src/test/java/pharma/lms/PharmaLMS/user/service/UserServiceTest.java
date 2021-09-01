@@ -7,6 +7,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.TestPropertySource;
+import pharma.lms.PharmaLMS.result.service.UserQuizResultService;
 import pharma.lms.PharmaLMS.user.domain.Department;
 import pharma.lms.PharmaLMS.user.domain.User;
 import pharma.lms.PharmaLMS.user.domain.UserRole;
@@ -22,10 +23,11 @@ class UserServiceTest {
     @Mock
     private UserRepo userRepo;
     private UserService userService;
+    private UserQuizResultService userQuizResultService;
 
     @BeforeEach
     void setUp() {
-        userService = new UserService(userRepo);
+        userService = new UserService(userRepo, userQuizResultService);
     }
 
     @Test
@@ -51,4 +53,10 @@ class UserServiceTest {
         assertThat(capturedUser).isEqualTo(user);
     }
 
+    @Test
+    void findUserByIdTest() {
+        userService.findUserById(1L);
+
+        verify(userRepo).findUserById(1L);
+    }
 }
