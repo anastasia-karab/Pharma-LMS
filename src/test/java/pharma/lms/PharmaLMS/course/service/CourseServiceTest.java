@@ -1,6 +1,5 @@
 package pharma.lms.PharmaLMS.course.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -18,22 +17,17 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource("/application-test.properties")
-class CourseServiceTest {
+public class CourseServiceTest {
 
     @Mock
     private CourseRepo courseRepo;
     @Mock
     private PresentationRepo presentationRepo;
-
+    @InjectMocks
     private CourseService courseService;
 
-    @BeforeEach
-    void setUp() {
-        courseService = new CourseService(courseRepo, presentationRepo);
-    }
-
     @Test
-    void addCourseTest() {
+    public void addCourseTest() {
         Course course = new Course("Стерилизация", Department.Производство);
 
         courseService.addCourse(course);
@@ -48,14 +42,14 @@ class CourseServiceTest {
     }
 
     @Test
-    void findAllCoursesTest() {
+    public void findAllCoursesTest() {
         courseService.findAllCourses();
 
         verify(courseRepo).findAll();
     }
 
     @Test
-    void updateCourseTest() {
+    public void updateCourseTest() {
         Course course = new Course("Стерилизация", Department.Производство);
 
         courseService.updateCourse(course);
@@ -70,7 +64,7 @@ class CourseServiceTest {
     }
 
     @Test
-    void deleteCourseTest() {
+    public void deleteCourseTest() {
         Course course = new Course("Стерилизация", Department.Производство);
 
         courseService.deleteCourseById(course.getId());

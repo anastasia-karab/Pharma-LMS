@@ -49,7 +49,7 @@ public class LoginTest {
         this.mockMvc.perform(formLogin().user("user").password("user"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/course/all"));
+                .andExpect(redirectedUrl("/pharmalms/mycourses"));
     }
 
     @Test
