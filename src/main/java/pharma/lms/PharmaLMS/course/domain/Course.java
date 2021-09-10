@@ -22,6 +22,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "course_id")
     private Long id;
+    @Column(name = "course_name", length = 50, nullable = false, unique = true)
     private String courseName;
 
     @ManyToMany(cascade = CascadeType.REMOVE)
@@ -33,6 +34,7 @@ public class Course {
     private Set<Presentation> presentations = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 35, nullable = false)
     private Department department;
 
     public Course(String courseName,

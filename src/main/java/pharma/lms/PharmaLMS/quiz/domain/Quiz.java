@@ -11,6 +11,7 @@ import pharma.lms.PharmaLMS.result.domain.UserQuizResult;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,7 +25,10 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "quiz_name", length = 30, unique = true, nullable = false)
+    @Size(min = 5, max = 30)
     private String quizName;
+    @Column(name = "quiz_type", length = 40, nullable = false)
     private String quizType;
 
     @OneToOne(mappedBy = "quiz")
@@ -37,6 +41,7 @@ public class Quiz {
     @JsonProperty("questions")
     private List<Question> questions;
 
+    @Column(name = "file_dir", length = 80)
     private String quizFileDir;
 
     @Lob

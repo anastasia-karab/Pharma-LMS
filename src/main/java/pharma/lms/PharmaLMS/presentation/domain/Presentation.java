@@ -8,6 +8,7 @@ import pharma.lms.PharmaLMS.course.domain.Course;
 import pharma.lms.PharmaLMS.quiz.domain.Quiz;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +24,10 @@ public class Presentation {
     @Column(name = "presentation_id")
     private Long id;
 
+    @Column(name = "presentation_name", length = 30, nullable = false, unique = true)
+    @Size(min = 5, max = 30)
     private String presName;
+    @Column(name = "presentation_type", length = 40, nullable = false)
     private String presType;
 
     @ManyToMany(mappedBy = "presentations")

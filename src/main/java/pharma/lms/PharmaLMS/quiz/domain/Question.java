@@ -13,12 +13,14 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Table(name = "questions")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Long questionId;
 
+    @Column(length = 150)
     private String question;
     private String[] answers;
     private Long correctIndex;
